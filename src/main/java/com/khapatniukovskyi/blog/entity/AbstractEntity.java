@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.khapatniukovskyi.blog.model.AbstractModel;
 
-public class AbstractEntity<PK> extends AbstractModel implements Serializable {
+public abstract class AbstractEntity<PK> extends AbstractModel implements Serializable {
 	
 	/**
 	 * 

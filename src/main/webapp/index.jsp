@@ -2,4 +2,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!-- REDIRECT TO NEWS PAGE -->
-<c:redirect url="/news" />
+<c:redirect url="/ROOT/news" />

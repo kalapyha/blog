@@ -1,5 +1,9 @@
 package com.khapatniukovskyi.blog.service;
 
-public interface BusinessService {
+import java.util.Map;
 
+import com.khapatniukovskyi.blog.entity.Category;
+
+public interface BusinessService {
+	Map<Integer, Category> mapCategories();
 }

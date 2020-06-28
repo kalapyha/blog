@@ -16,7 +16,6 @@ import com.khapatniukovskyi.blog.util.AppUtil;
 
 // I'm trying to use Singleton design pattern here 
 public class ServiceManager {
-	
 	public static ServiceManager getInstance(ServletContext context) {
 		ServiceManager instance = (ServiceManager) context.getAttribute(SERVICE_MANAGER);
 		if (instance == null) {
@@ -25,10 +24,8 @@ public class ServiceManager {
 		}
 		return instance;
 	}
-	
 	public void destroy() {
 		try {
-			//Closing DB source here after closing the Manager
 			dataSource.close();
 		} catch (SQLException e) {
 			LOGGER.error("Close dataSource failed: "+e.getMessage(), e);
@@ -37,7 +34,6 @@ public class ServiceManager {
 		LOGGER.info("ServiceManager instance destroyed");
 		
 	}
-	
 	public BusinessService getBusinessService() {
 		return businessService;
 	}
@@ -55,7 +51,7 @@ public class ServiceManager {
 	private ServiceManager(ServletContext context) {
 		AppUtil.loadProperties(applicationProperties, "application.properties");
 		dataSource = createBasicDataSource();
-		businessService = new BusinessServiceImpl();
+		businessService = new BusinessServiceImpl(this);
 		LOGGER.info("ServiceManager instance created");
 	}
 	
@@ -72,4 +68,3 @@ public class ServiceManager {
 		return ds;
 	}
 }
-
