@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.khapatniukovskyi.blog.service.BusinessService;
+import com.khapatniukovskyi.blog.service.impl.ServiceManager;
+
 public class AbstractController extends HttpServlet {
 
 	/**
@@ -17,8 +20,14 @@ public class AbstractController extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 62504337429437913L;
 	protected final Logger LOGGER = LoggerFactory.getLogger(getClass());
-	
-	
+	private BusinessService businessService;
+	public final BusinessService getBusinessService() {
+		return businessService;
+	}
+	@Override
+	public void init() throws ServletException {
+		businessService = ServiceManager.getInstance(getServletContext()).getBusinessService();
+	}
 	/**
 	 * I'm trying to use some kind of templating in this snippet
 	 * "currentPage" will be parsing and inserting into the page-template.jsp
