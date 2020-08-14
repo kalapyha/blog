@@ -4,9 +4,9 @@
 	<div class="data">
 		<h3>Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.</h3>
 		<ul class="vertical large-horizontal menu">
-			<li><i class="fi-folder"></i><a href="/ROOT/news">Phasellus</a></li>
+			<li><i class="fi-folder"></i><a href="/news">Phasellus</a></li>
 			<li><i class="fi-comments"></i>14 comments</li>
-			<li><i class="fi-clock"></i>7 Sep 2015, 7:47</li>
+			<li><i class="fi-clock"></i>7 Sep 2020, 7:47</li>
 			<li><i class="fi-eye"></i>Hits: 7&nbsp;168</li>
 		</ul>
 		<hr>

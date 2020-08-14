@@ -17,7 +17,6 @@ public class MapCategoryMapper implements ResultSetHandler<Map<Integer, Category
 	@Override
 	public Map<Integer, Category> handle(ResultSet rs) throws SQLException {
 		Map<Integer, Category> map = new HashMap<>();
-		//Each category obj goes to Map
 		while (rs.next()) {
 			Category category = convert.toBean(rs, Category.class);
 			map.put(category.getId(), category);
