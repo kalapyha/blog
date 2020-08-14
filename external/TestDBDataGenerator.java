@@ -18,10 +18,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
 /**
  * http://www.blindtextgenerator.com/lorem-ipsum - text generator: Lorem ipsum ,1003 words 
  * https://placeimg.com/1000/400/tech - image generator with content
@@ -30,9 +26,6 @@ import java.sql.SQLException;
  * 
  * Please add postgres JDBC driver to classpath before launch this generator
  * 
- * @author devstudy
- * @see http://devstudy.net
- * @version 1.0
  */
 public class TestDBDataGenerator {
 	// Test sentences for content generation
@@ -48,11 +41,11 @@ public class TestDBDataGenerator {
 	// Min article id
 	private static final int START_ARTICLE_ID = 200;
 	// Absolute path to media directory for blog project
-	private static final String DEST_MEDIA = "/Users/imac/Desktop/JS";
+	private static final String DEST_MEDIA = "D:\\workspace\\blog\\src\\main\\webapp\\media";
 	// JDBC setting for blog database
-	private static final String JDBC_URL = "jdbc:mysql://localhost:3306/blog";
-	private static final String JDBC_USERNAME = "root";
-	private static final String JDBC_PASSWORD = "28061989";
+	private static final String JDBC_URL = "jdbc:postgresql://localhost/blog";
+	private static final String JDBC_USERNAME = "blog";
+	private static final String JDBC_PASSWORD = "password";
 
 	// Others variables and method are for internal use only
 	/*****************************************************************************************************************************/
@@ -94,8 +87,8 @@ public class TestDBDataGenerator {
 			st.executeUpdate("delete from article");
 			st.executeUpdate("delete from account");
 			st.executeUpdate("delete from category");
-//			st.executeQuery("select setval('account_seq', 1, false)");
-//			st.executeQuery("select setval('comment_seq', 1, false)");
+			st.executeQuery("select setval('account_seq', 1, false)");
+			st.executeQuery("select setval('comment_seq', 1, false)");
 		}
 		c.commit();
 		System.out.println("Db data deleted");
@@ -117,7 +110,7 @@ public class TestDBDataGenerator {
 		throw new IllegalStateException("This exception is not possible");
 	}
 
-	private static List<CategoryItem> generateCategories(Connection c) throws Exception {
+	private static List<CategoryItem> generateCategories(Connection c) throws SQLException {
 		List<CategoryItem> categories = new ArrayList<>();
 		try (PreparedStatement ps = c.prepareStatement("insert into category values (?,?,?,?)")) {
 			for (int i = 0; i < CATEGORY_SIZE; i++) {
@@ -287,10 +280,10 @@ public class TestDBDataGenerator {
 
 	private static void generateAccounts(Connection c) throws SQLException, IOException {
 		List<String> names = new ArrayList<String>(Arrays.asList(NAMES));
-		try (PreparedStatement ps = c.prepareStatement("insert into account values (('account_seq'),?,?,?,?)")) {
+		try (PreparedStatement ps = c.prepareStatement("insert into account values (nextval('account_seq'),?,?,?,?)")) {
 			for (int i = 0; i < accountCount; i++) {
 				String name = names.remove(r.nextInt(names.size()));
-				ps.setString(1, name.toLowerCase() + "@devstudy.net");
+				ps.setString(1, name.toLowerCase() + "@google.com");
 				ps.setString(2, name);
 				ps.setString(3, generateAccountAvatar());
 				ps.setTimestamp(4, generateCreatedTimestamp());
@@ -315,7 +308,7 @@ public class TestDBDataGenerator {
 
 	private static void generateComments(Connection c, List<ArticleItem> articles) throws SQLException {
 		int count = 0;
-		try (PreparedStatement ps = c.prepareStatement("insert into comment values (('comment_seq'),?,?,?,?)")) {
+		try (PreparedStatement ps = c.prepareStatement("insert into comment values (nextval('comment_seq'),?,?,?,?)")) {
 			for (ArticleItem item : articles) {
 				if (item.comments > 0) {
 					List<Integer> idAccounts = new ArrayList<>();
@@ -377,10 +370,10 @@ public class TestDBDataGenerator {
 		}
 	}
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		init();
 		deleteMediaDir();
-		try (Connection c = DriverManager.getConnection(JDBC_URL + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", JDBC_USERNAME, JDBC_PASSWORD)) {
+		try (Connection c = DriverManager.getConnection(JDBC_URL, JDBC_USERNAME, JDBC_PASSWORD)) {
 			c.setAutoCommit(false);
 			clearDb(c);
 			List<CategoryItem> categories = generateCategories(c);
