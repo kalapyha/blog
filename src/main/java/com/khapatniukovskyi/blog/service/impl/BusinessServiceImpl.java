@@ -10,6 +10,7 @@ import com.khapatniukovskyi.blog.dao.SQLDAO;
 import com.khapatniukovskyi.blog.entity.Article;
 import com.khapatniukovskyi.blog.entity.Category;
 import com.khapatniukovskyi.blog.exception.ApplicationException;
+import com.khapatniukovskyi.blog.exception.RedirectToValidUrlException;
 import com.khapatniukovskyi.blog.model.Items;
 import com.khapatniukovskyi.blog.service.BusinessService;
 
@@ -75,5 +76,11 @@ class BusinessServiceImpl implements BusinessService {
 		} catch (SQLException e) {
 			throw new ApplicationException("Can't execute db command: " + e.getMessage(), e);
 		}
+	}
+
+	@Override
+	public Article viewArticle(Long idArticle, String requestUrl) throws RedirectToValidUrlException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
