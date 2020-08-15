@@ -28,7 +28,7 @@ public class SearchController extends AbstractController {
 			req.setAttribute("count", items.getCount());
 			req.setAttribute("searchQuery", query);
 			forwardToPage("search.jsp", req, resp);
-		} else { // empty request redirect HERE 
+		} else { // empty request redirect HERE   
 			resp.sendRedirect("http://localhost:8080/ROOT/news");
 		}
 	}
