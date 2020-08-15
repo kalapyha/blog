@@ -29,7 +29,7 @@ public class SearchController extends AbstractController {
 			req.setAttribute("searchQuery", query);
 			forwardToPage("search.jsp", req, resp);
 		} else {
-			resp.sendRedirect("/news");
+			resp.sendRedirect("http://localhost:8080/ROOT/news");
 		}
 	}
 }

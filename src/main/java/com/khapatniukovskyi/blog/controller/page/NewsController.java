@@ -26,8 +26,7 @@ public class NewsController extends AbstractController {
 		}
 		else{
 			String categoryUrl = requestUrl.replace("/news", "");
-			categoryUrl = "mauris";
-			
+			System.out.println(categoryUrl);
 			items = getBusinessService().listArticlesByCategory(categoryUrl, 0, Constants.LIMIT_ARTICLES_PER_PAGE);
 			Category category = getBusinessService().findCategoryByUrl(categoryUrl);
 			req.setAttribute("selectedCategory", category);
