@@ -80,7 +80,21 @@ class BusinessServiceImpl implements BusinessService {
 
 	@Override
 	public Article viewArticle(Long idArticle, String requestUrl) throws RedirectToValidUrlException {
-		// TODO Auto-generated method stub
-		return null;
+		try (Connection c = dataSource.getConnection()) {
+			Article article = sql.findArticleById(c, idArticle);
+			if (article == null) {
+				return null;
+			}
+			if (!article.getArticleLink().equals(requestUrl)) {
+				throw new RedirectToValidUrlException(article.getArticleLink());
+			} else {
+				article.setViews(article.getViews() + 1);
+				sql.updateArticleViews(c, article);
+				c.commit();
+				return article;
+			}
+		} catch (SQLException e) {
+			throw new ApplicationException("Can't execute db command: " + e.getMessage(), e);
+		}
 	}
 }
