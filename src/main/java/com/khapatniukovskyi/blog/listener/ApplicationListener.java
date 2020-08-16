@@ -1,5 +1,8 @@
 package com.khapatniukovskyi.blog.listener;
-
+/** @author devstudy
+* @see http://devstudy.net
+* @version 1.0
+*/
 import java.util.Map;
 
 import javax.servlet.ServletContextEvent;

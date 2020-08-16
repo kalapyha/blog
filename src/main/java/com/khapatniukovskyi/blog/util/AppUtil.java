@@ -1,5 +1,8 @@
 package com.khapatniukovskyi.blog.util;
-
+/** @author devstudy
+* @see http://devstudy.net
+* @version 1.0
+*/
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;

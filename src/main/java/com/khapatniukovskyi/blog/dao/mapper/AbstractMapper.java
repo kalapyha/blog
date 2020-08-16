@@ -1,5 +1,8 @@
 package com.khapatniukovskyi.blog.dao.mapper;
-
+/** @author devstudy
+* @see http://devstudy.net
+* @version 1.0
+*/
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

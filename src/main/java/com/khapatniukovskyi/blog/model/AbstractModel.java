@@ -1,5 +1,8 @@
 package com.khapatniukovskyi.blog.model;
-
+/** @author devstudy
+* @see http://devstudy.net
+* @version 1.0
+*/
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
