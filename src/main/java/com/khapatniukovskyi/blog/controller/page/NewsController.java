@@ -25,7 +25,7 @@ public class NewsController extends AbstractController {
 			items = getBusinessService().listArticles(0, Constants.LIMIT_ARTICLES_PER_PAGE);
 		}
 		else{
-			String categoryUrl = requestUrl.replace("http://localhost:8080/ROOT/news", "");
+			String categoryUrl = requestUrl.replace("/ROOT/news", "");
 			System.out.println(categoryUrl);
 			items = getBusinessService().listArticlesByCategory(categoryUrl, 0, Constants.LIMIT_ARTICLES_PER_PAGE);
 			Category category = getBusinessService().findCategoryByUrl(categoryUrl);

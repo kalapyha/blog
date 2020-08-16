@@ -70,7 +70,7 @@ public class Article extends AbstractEntity<Long> {
 		this.comments = comments;
 	}
 	public String getArticleLink(){
-		return "/article/"+getId()+url;
+		return "/ROOT/article/"+getId()+url;
 	}
 	public String getShortTitle(){
 		if(StringUtils.length(title) > 20) {

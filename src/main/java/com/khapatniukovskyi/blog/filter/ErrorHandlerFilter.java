@@ -22,7 +22,7 @@ public class ErrorHandlerFilter extends AbstractFilter {
 				resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			} else if (!requestUrl.startsWith("/error")) {
 				// Message to user |  ErrorController
-				resp.sendRedirect("/error");
+				resp.sendRedirect("error.jsp");
 			} else {
 				// Escape from cycle redirect here 
 				throw new ServletException(th);
